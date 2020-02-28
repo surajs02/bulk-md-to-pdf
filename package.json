@@ -1,0 +1,23 @@
+{
+  "name": "bulk-md-to-pdf",
+  "version": "1.0.0",
+  "description": "Converts md notes to pdf",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./src/js/pdfBuilder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/surajs02/bulk-md-to-pdf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/surajs02/bulk-md-to-pdf/issues"
+  },
+  "homepage": "https://github.com/surajs02/bulk-md-to-pdf#readme",
+  "dependencies": {
+    "md-to-pdf": "^2.8.2"
+  }
+}
