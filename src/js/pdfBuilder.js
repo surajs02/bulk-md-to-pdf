@@ -7,16 +7,23 @@ const getFileNamesInDir = dir => new Promise((res, rej) => {
     return fs.readdir(dir, (err, files) => err != null ? rej(err) : res(files))
 });
 
+const extractFileNameParts = fileName => {
+    const fileNameParts = fileName.split('.');
+    return { name: fileNameParts[0], ext: fileNameParts[1] };
+};
+
 const main = async () => {
     const pdfsDir = DIRS.getBuild();
 
     Promise.all(
-        (await getFileNamesInDir(DIRS.getNotes())).map(n => {
-            const noteNoExt = n.split('.')[0];
-            return mdToPdf(
-                `src/notes/${n}`,
-                { dest: `${pdfsDir}/${noteNoExt}.pdf` }
-            );
+        (await getFileNamesInDir(DIRS.getNotes()))
+            .filter(n => extractFileNameParts(n).ext === 'md')
+            .map(n => {
+                const noteNoExt = extractFileNameParts(n).name;
+                return mdToPdf(
+                    `src/notes/${n}`,
+                    { dest: `${pdfsDir}/${noteNoExt}.pdf` }
+                );
         })
     )
         .then(outputs => {
