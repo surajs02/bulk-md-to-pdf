@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/surajs02/bulk-md-to-pdf#readme",
   "dependencies": {
-    "md-to-pdf": "^2.8.2"
+    "md-to-pdf": "^2.8.2",
+    "moment": "^2.24.0"
   }
 }

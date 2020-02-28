@@ -1,5 +1,6 @@
 const mdToPdf = require('md-to-pdf');
 const fs = require('fs');
+const moment = require('moment');
 
 const { DIRS } = require('./constants');
 
@@ -22,7 +23,7 @@ const main = async () => {
                 const noteNoExt = extractFileNameParts(n).name;
                 return mdToPdf(
                     `src/notes/${n}`,
-                    { dest: `${pdfsDir}/${noteNoExt}.pdf` }
+                    { dest: `${pdfsDir}/${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf` }
                 );
         })
     )
