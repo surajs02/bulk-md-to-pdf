@@ -4,7 +4,8 @@
   "description": "Converts md notes to pdf",
   "main": "index.js",
   "scripts": {
-    "build": "node ./src/js/pdfBuilder.js"
+    "build": "node ./src/js/pdfBuilder.js",
+    "clean": "node ./src/js/cleanBuild.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/surajs02/bulk-md-to-pdf#readme",
   "dependencies": {
+    "chalk": "^3.0.0",
     "md-to-pdf": "^2.8.2",
     "moment": "^2.24.0"
   }

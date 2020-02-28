@@ -3,15 +3,7 @@ const fs = require('fs');
 const moment = require('moment');
 
 const { DIRS } = require('./constants');
-
-const getFileNamesInDir = dir => new Promise((res, rej) => {
-    return fs.readdir(dir, (err, files) => err != null ? rej(err) : res(files))
-});
-
-const extractFileNameParts = fileName => {
-    const fileNameParts = fileName.split('.');
-    return { name: fileNameParts[0], ext: fileNameParts[1] };
-};
+const { getFileNamesInDir, extractFileNameParts } = require('./utilFile');
 
 const main = async () => {
     const pdfsDir = DIRS.getBuild();
