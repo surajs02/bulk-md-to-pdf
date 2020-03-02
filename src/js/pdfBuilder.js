@@ -5,23 +5,26 @@ const moment = require('moment');
 const { DIRS } = require('./constants');
 const { getFileNamesInDir, extractFileNameParts } = require('./utilFile');
 
-const main = async () => {
+const build = async (notesDirPath = DIRS.getNotes()) => {
     const pdfsDir = DIRS.getBuild();
 
     Promise.all(
-        (await getFileNamesInDir(DIRS.getNotes()))
+        (await getFileNamesInDir(notesDirPath))
             .filter(n => extractFileNameParts(n).ext === 'md')
             .map(n => {
                 const noteNoExt = extractFileNameParts(n).name;
                 return mdToPdf(
-                    `src/notes/${n}`,
+                    `${notesDirPath}/${n}`,
                     { dest: `${pdfsDir}/${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf` }
                 );
         })
     )
         .then(outputs => {
-            console.log(`Converted ${outputs.length} md files to pdf files in ${pdfsDir}`)
+            console.log(`Converted ${outputs.length} md files (${notesDirPath}) to pdf files (${pdfsDir})`)
         })
         .catch(console.error);
-};
-main();
+}
+
+module.exports = {
+    build,
+}
