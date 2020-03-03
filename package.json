@@ -4,7 +4,9 @@
   "description": "Converts md notes to pdf",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/js/cli.js"
+    "start": "node ./src/js/cli.js",
+    "build": "node ./src/js/cli.js b",
+    "clean": "node ./src/js/cli.js c"
   },
   "repository": {
     "type": "git",
