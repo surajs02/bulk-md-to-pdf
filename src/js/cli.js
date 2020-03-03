@@ -3,9 +3,9 @@
 
 const program = require('commander');
 
+const { DIRS } = require('./constants');
 const pdfBuilder = require('./pdfBuilder');
 const { version, description } = require('./../../package.json')
-const { DIRS } = require('./constants');
 
 program
     .version(version)
@@ -13,10 +13,17 @@ program
 
 program
     .command('build <notesDirPath>')
-    .description('`Builds md in path to pdf (defaults to ${DIRS.getBuild()} if no path given)`')
+    .alias('b')
+    .description(`Builds md in path to pdf (defaults to ${DIRS.getBuild()} if no path given)`)
     .action(notesDirPath => {
         pdfBuilder.build(notesDirPath)
     });
+
+program
+    .command('clean')
+    .alias('c')
+    .description(`Cleans pdf' s in ${DIRS.getBuild()}`)
+    .action(() => pdfBuilder.clean());
     
 program.parse(process.argv);
 
