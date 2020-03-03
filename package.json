@@ -4,8 +4,6 @@
   "description": "Converts md notes to pdf",
   "main": "index.js",
   "scripts": {
-    "build": "node ./src/js/pdfBuilder.js",
-    "clean": "node ./src/js/cleanBuild.js",
     "start": "node ./src/js/cli.js"
   },
   "repository": {
