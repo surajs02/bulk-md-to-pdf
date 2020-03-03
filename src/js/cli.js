@@ -26,8 +26,3 @@ program
     .action(() => pdfBuilder.clean());
     
 program.parse(process.argv);
-
-// console.log('program: '+JSON.stringify(program));
-// console.log('notesDirPath: '+program.notesDirPath);
-    
-// pdfBuilder.build(program.notesDirPath);
