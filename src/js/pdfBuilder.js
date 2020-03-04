@@ -1,5 +1,6 @@
 const moment = require('moment');
-const mdToPdf = require('md-to-pdf');
+const { mdToPdf } = require('md-to-pdf');
+const path = require('path');
 
 const { DIRS } = require('./constants');
 const { getFileNamesInDir, extractFileNameParts, deleteFile } = require('./utilFile');
@@ -8,14 +9,20 @@ const { logw } = require('./util');
 const build = async (notesDirPath = DIRS.getNotes()) => {
     const pdfsDir = DIRS.getBuild();
 
+    // Allows access note's sibling dirs (e.g., md files might reference notes/../imgs/)
+    const notesDirParent = path.join(notesDirPath, '..', '..');
+
     Promise.all(
         (await getFileNamesInDir(notesDirPath))
             .filter(n => extractFileNameParts(n).ext === 'md')
             .map(n => {
                 const noteNoExt = extractFileNameParts(n).name;
                 return mdToPdf(
-                    `${notesDirPath}/${n}`,
-                    { dest: `${pdfsDir}/${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf` }
+                    { path: `${notesDirPath}/${n}` },
+                    { 
+                        basedir: notesDirParent, // Via md-to-pdf@next (v3+).
+                        dest: `${pdfsDir}/${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf`,
+                    }
                 );
         })
     )
