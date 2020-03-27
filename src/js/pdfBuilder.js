@@ -11,6 +11,8 @@ const buildDir = DIRS.getBuild();
 if (!fs.existsSync(buildDir)) console.log('No build folder found, creating it...'), fs.mkdirSync(buildDir);
 
 const build = async (notesDirPath = DIRS.getNotes()) => {
+    await clean();
+
     // Allows access note's sibling dirs (e.g., md files might reference notes/../imgs/)
     const notesDirParent = path.join(notesDirPath, '..', '..');
 
