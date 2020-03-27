@@ -1,14 +1,16 @@
 const moment = require('moment');
 const { mdToPdf } = require('md-to-pdf');
 const path = require('path');
+const fs = require('fs');
 
 const { DIRS } = require('./constants');
 const { getFileNamesInDir, extractFileNameParts, deleteFile } = require('./utilFile');
 const { logw } = require('./util');
 
-const build = async (notesDirPath = DIRS.getNotes()) => {
-    const pdfsDir = DIRS.getBuild();
+const buildDir = DIRS.getBuild();
+if (!fs.existsSync(buildDir)) console.log('No build folder found, creating it...'), fs.mkdirSync(buildDir);
 
+const build = async (notesDirPath = DIRS.getNotes()) => {
     // Allows access note's sibling dirs (e.g., md files might reference notes/../imgs/)
     const notesDirParent = path.join(notesDirPath, '..', '..');
 
@@ -21,31 +23,30 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
                     { path: `${notesDirPath}/${n}` },
                     { 
                         basedir: notesDirParent, // Via md-to-pdf@next (v3+).
-                        dest: `${pdfsDir}/${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf`,
+                        dest: `${buildDir}/${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf`,
                     }
                 );
         })
     )
         .then(outputs => {
-            console.log(`Converted ${outputs.length} md files (${notesDirPath}) to pdf files (${pdfsDir})`)
+            console.log(`Converted ${outputs.length} md files (${notesDirPath}) to pdf files (${buildDir})`);
         })
         .catch(console.error);
 };
 
 const clean = async () => {
-    const build = DIRS.getBuild();
-    const buildFiles = await getFileNamesInDir(build);
+    const buildFiles = await getFileNamesInDir(buildDir);
 
     const hasBuildFiles = buildFiles.length < 1;
     if (hasBuildFiles) {
-        logw(`No files to clean in ${build}`);
+        logw(`No files to clean in ${buildDir}`);
         return;
     };
 
     const deleteRes = await Promise.all(
-        buildFiles.map(f => deleteFile(build+f))
+        buildFiles.map(f => deleteFile(buildDir+f))
     )
-    console.log(`Cleaned ${deleteRes.length} files in ${build}`);
+    console.log(`Cleaned ${deleteRes.length} files in ${buildDir}`);
 };
 
 module.exports = {
