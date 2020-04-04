@@ -8,7 +8,9 @@
     "build": "node ./src/js/cli.js b",
     "openBuild": "node ./src/js/cli.js o",
     "clean": "node ./src/js/cli.js c",
-    "deployPatch": "npm version patch && npm publish"
+    "failOnGitDirty": "node ./src/js/failOnGitDirty.js",
+    "deployPatch": "npm run failOnGitDirty && npm version patch && npm publish"
+
   },
   "repository": {
     "type": "git",
