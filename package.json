@@ -3,20 +3,32 @@
   "version": "1.0.0",
   "description": "Converts md notes to pdf",
   "main": "./src/js/cli.js",
+  "engines": {
+    "node": ">=8.11.3"
+  },
+  "bin": {
+    "bulk-md-to-pdf": "./src/js/cli.js"
+  },
   "scripts": {
     "start": "node ./src/js/cli.js",
     "build": "node ./src/js/cli.js b",
     "openBuild": "node ./src/js/cli.js o",
     "clean": "node ./src/js/cli.js c",
-    "failOnGitDirty": "node ./src/js/failOnGitDirty.js",
-    "deployPatch": "npm run failOnGitDirty && npm version patch && npm publish"
-
+    "preDeploy": "fail-on-git-dirty",
+    "deployPatch": "npm run preDeploy && npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/surajs02/bulk-md-to-pdf.git"
   },
-  "keywords": [],
+  "keywords": [
+    "bulk",
+    "markdown-to-pdf",
+    "markdown",
+    "pdf",
+    "pdf-generation",
+    "util"
+  ],
   "author": "Suraj Sharma",
   "license": "MIT",
   "bugs": {
@@ -30,7 +42,7 @@
     "moment": "^2.24.0",
     "open": "^7.0.3"
   },
-  "bin": {
-    "bulk-md-to-pdf": "./src/js/cli.js"
+  "devDependencies": {
+    "fail-on-git-dirty": "^1.0.3"
   }
 }
