@@ -9,7 +9,6 @@
     "openBuild": "node ./src/js/cli.js o",
     "clean": "node ./src/js/cli.js c",
     "deployPatch": "npm version patch && npm publish"
-
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,8 @@
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
     "md-to-pdf": "^3.0.0-pre.1",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "open": "^7.0.3"
   },
   "bin": {
     "bulk-md-to-pdf": "./src/js/cli.js"

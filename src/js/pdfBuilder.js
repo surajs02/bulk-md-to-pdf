@@ -2,7 +2,7 @@ const moment = require('moment');
 const { mdToPdf } = require('md-to-pdf');
 const path = require('path');
 const fs = require('fs');
-const { exec } = require('child_process');
+const open = require('open');
 
 const { DIRS } = require('./constants');
 const { getFileNamesInDir, extractFileNameParts, deleteFile } = require('./utilFile');
@@ -63,7 +63,7 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
 };
 
 const openBuild = () => {
-    exec(`start ${buildDir}`);
+    open(buildDir);
 }
 
 const clean = async () => {
