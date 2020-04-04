@@ -13,6 +13,7 @@ npm install -g bulk-md-to-pdf
 
     E.g., `bulk-md-to-pdf build ./notes` (or `bulk-md-to-pdf b ./notes`)
 
+- `open-build` (alias `o`): Opens the build folder
 - `clean` (alias `c`): Removes all built `*.pdf` files
 
 ## Testing

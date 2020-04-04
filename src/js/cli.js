@@ -7,6 +7,8 @@ const { DIRS } = require('./constants');
 const pdfBuilder = require('./pdfBuilder');
 const { version, description } = require('./../../package.json')
 
+const buildDir = DIRS.getBuild();
+
 program
     .version(version)
     .description(description)
@@ -14,9 +16,17 @@ program
 program
     .command('build <notesDirPath>')
     .alias('b')
-    .description(`Builds md in path to pdf (defaults to ${DIRS.getBuild()} if no path given)`)
+    .description(`Builds md in path to pdf (defaults to ${buildDir} if no path given)`)
     .action(notesDirPath => {
         pdfBuilder.build(notesDirPath)
+    });
+
+program
+    .command('open-build')
+    .alias('o')
+    .description(`Opens build folder (${buildDir})`)
+    .action(() => {
+        pdfBuilder.openBuild();
     });
 
 program

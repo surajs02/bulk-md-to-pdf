@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./src/js/cli.js",
     "build": "node ./src/js/cli.js b",
+    "openBuild": "node ./src/js/cli.js o",
     "clean": "node ./src/js/cli.js c",
     "deployPatch": "npm version patch && npm publish"
 
