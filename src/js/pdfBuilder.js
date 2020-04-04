@@ -77,7 +77,7 @@ const clean = async () => {
     };
 
     const deleteRes = await Promise.all(
-        buildFiles.map(f => deleteFile(buildDir+f))
+        buildFiles.map(f => deleteFile(path.resolve(buildDir, f)))
     )
     console.log(`Cleaned ${deleteRes.length} files in ${buildDir}`);
 };
