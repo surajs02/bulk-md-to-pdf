@@ -22,12 +22,13 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
             .filter(n => extractFileNameParts(n).ext === 'md')
             .map(n => {
                 const noteNoExt = extractFileNameParts(n).name;
+                
                 const pdfFileName = `${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf`;
                 return mdToPdf(
-                    { path: `${notesDirPath}/${n}` },
+                    { path: path.join(notesDirPath, n) },
                     { 
                         basedir: notesDirParent, // Via md-to-pdf@next (v3+).
-                        dest: `${buildDir}/${pdfFileName}`,
+                        dest: path.join(buildDir, pdfFileName),
                         pdf_options: {
                             displayHeaderFooter: true,
                             headerTemplate: `
