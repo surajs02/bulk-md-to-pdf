@@ -4,11 +4,14 @@
   "description": "Converts md notes to pdf",
   "main": "./src/js/cli.js",
   "engines": {
-    "node": ">=8.11.3"
+    "node": ">=12.16.1"
   },
   "bin": {
     "bulk-md-to-pdf": "./src/js/cli.js"
   },
+  "files": [
+    "./src/js/*.js"
+  ],
   "scripts": {
     "start": "node ./src/js/cli.js",
     "build": "node ./src/js/cli.js b",
