@@ -2,7 +2,7 @@
   "name": "bulk-md-to-pdf",
   "version": "1.0.0",
   "description": "Converts md notes to pdf",
-  "main": "index.js",
+  "main": "./src/js/cli.js",
   "scripts": {
     "start": "node ./src/js/cli.js",
     "build": "node ./src/js/cli.js b",
@@ -13,8 +13,8 @@
     "url": "git+https://github.com/surajs02/bulk-md-to-pdf.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Suraj Sharma",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/surajs02/bulk-md-to-pdf/issues"
   },
