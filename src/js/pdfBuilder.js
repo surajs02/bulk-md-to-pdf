@@ -22,8 +22,7 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
             .filter(n => extractFileNameParts(n).ext === 'md')
             .map(n => {
                 const noteNoExt = extractFileNameParts(n).name;
-                
-                const pdfFileName = `${noteNoExt}_${moment().format('YYYY-MM-DD')}.pdf`;
+                const pdfFileName = `${noteNoExt}_${moment().format('YYYYMMDD_HHmm')}.pdf`;
                 return mdToPdf(
                     { path: path.join(notesDirPath, n) },
                     { 
