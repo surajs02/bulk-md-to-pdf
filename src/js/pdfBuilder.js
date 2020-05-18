@@ -18,7 +18,7 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
     const notesDirParent = path.join(notesDirPath, '..', '..');
 
     Promise.all(
-        (await getFileNamesInDir(notesDirPath))
+            (await getFileNamesInDir(notesDirPath))
             .filter(n => extractFileNameParts(n).ext === 'md')
             .map(n => {
                 const noteNoExt = extractFileNameParts(n).name;
@@ -28,6 +28,8 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
                     { 
                         basedir: notesDirParent, // Via md-to-pdf@next (v3+).
                         dest: path.join(buildDir, pdfFileName),
+                        stylesheet: path.join(DIRS.getCss(), '/pdf.css'),
+                        body_class: 'markdown-body',
                         pdf_options: {
                             displayHeaderFooter: true,
                             headerTemplate: `
@@ -42,7 +44,7 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
                                     <div>${pdfFileName}</div>
                                 </section>
                             `,
-                            footerTemplate: `
+                        footerTemplate: `
                                 <section>
                                     <div>
                                         Page <span class="pageNumber"></span>
