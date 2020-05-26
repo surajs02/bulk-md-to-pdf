@@ -14,7 +14,7 @@ if (!fs.existsSync(buildDir)) console.log('No build folder found, creating it...
 const build = async (notesDirPath = DIRS.getNotes()) => {
     await clean();
 
-    // Allows access note's sibling dirs (e.g., md files might reference notes/../imgs/)
+    // Allows access note's sibling dirs (e.g., md files might reference notes/../imgs/).
     const notesDirParent = path.join(notesDirPath, '..', '..');
 
     Promise.all(
@@ -28,8 +28,16 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
                     { 
                         basedir: notesDirParent, // Via md-to-pdf@next (v3+).
                         dest: path.join(buildDir, pdfFileName),
-                        stylesheet: path.join(DIRS.getCss(), '/pdf.css'),
+                        stylesheet: path.join(DIRS.getCss(), '/pdf.min.css'),
                         body_class: 'markdown-body',
+                        css: `
+                            .page-break { page-break-after: always; }
+                            .markdown-body { font-size: 11px; }
+                            .markdown-body pre > code { white-space: pre-wrap; }
+                            .markdown-body code, .markdown-body kbd, .markdown-body pre {
+                                white-space : pre-wrap !important;
+                            }
+                        `,
                         pdf_options: {
                             displayHeaderFooter: true,
                             headerTemplate: `
