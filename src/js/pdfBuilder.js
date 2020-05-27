@@ -6,7 +6,7 @@ const open = require('open');
 
 const { DIRS } = require('./constants');
 const { getFileNamesInDir, extractFileNameParts, deleteFile } = require('./utilFile');
-const { logw } = require('./util');
+const { logw, genNixLetterUuid } = require('./util');
 
 const buildDir = DIRS.getBuild();
 if (!fs.existsSync(buildDir)) console.log('No build folder found, creating it...'), fs.mkdirSync(buildDir);
@@ -22,7 +22,7 @@ const build = async (notesDirPath = DIRS.getNotes()) => {
             .filter(n => extractFileNameParts(n).ext === 'md')
             .map(n => {
                 const noteNoExt = extractFileNameParts(n).name;
-                const pdfFileName = `${noteNoExt}_${moment().format('YYYYMMDD_HHmm')}.pdf`;
+                const pdfFileName = `${noteNoExt}_${moment().format('YYYYMMDD')}_${genNixLetterUuid()}.pdf`;
                 return mdToPdf(
                     { path: path.join(notesDirPath, n) },
                     { 
