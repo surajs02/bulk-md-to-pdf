@@ -2,23 +2,25 @@
   "name": "bulk-md-to-pdf",
   "version": "1.0.2",
   "description": "Converts md notes to pdf",
-  "main": "./src/js/cli.js",
+  "main": "dist/bundle.js",
   "engines": {
     "node": ">=12.16.1"
   },
   "bin": {
-    "bulk-md-to-pdf": "./src/js/cli.js"
+    "bulk-md-to-pdf": "dist/bundle.js"
   },
   "files": [
-    "./src/js/*.js"
+    "dist/"
   ],
   "scripts": {
     "start": "node ./src/js/cli.js",
     "build": "node ./src/js/cli.js b",
     "openBuild": "node ./src/js/cli.js o",
     "clean": "node ./src/js/cli.js c",
-    "preDeploy": "fail-on-git-dirty",
-    "deployPatch": "npm run preDeploy && npm version patch && npm publish"
+    "deploy:build:prod": "webpack --config ./webpack.config.js --mode production",
+    "deploy:build:dev": "webpack --config ./webpack.config.js --mode development",
+    "deploy:pre": "fail-on-git-dirty",
+    "deploy:patch": "npm run deploy:pre && npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
@@ -46,6 +48,15 @@
     "open": "^7.0.3"
   },
   "devDependencies": {
-    "fail-on-git-dirty": "^1.0.3"
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "babel-loader": "^8.2.2",
+    "fail-on-git-dirty": "^1.0.3",
+    "shebang-loader": "0.0.1",
+    "source-map": "^0.7.3",
+    "terser-webpack-plugin": "^5.1.3",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
