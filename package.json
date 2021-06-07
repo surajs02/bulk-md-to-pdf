@@ -10,7 +10,8 @@
     "bulk-md-to-pdf": "./src/js/cli.js"
   },
   "files": [
-    "./src/js/*.js"
+    "src/js/",
+    "src/css/"
   ],
   "scripts": {
     "start": "node ./src/js/cli.js",
