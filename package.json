@@ -42,7 +42,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
-    "md-to-pdf": "^3.0.0-pre.1",
+    "md-to-pdf": "^5.0.0",
     "moment": "^2.24.0",
     "open": "^7.0.3"
   },
